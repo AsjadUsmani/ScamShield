@@ -9,6 +9,7 @@ app.use(cors({
   methods: ['*'],
 }));
 app.use(express.json());
+app.use(express.urlencoded({extended: true}))
 
 app.get("/health", (req, res) => {
   res.json({ status: "ok" });
