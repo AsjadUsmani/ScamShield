@@ -1,11 +1,18 @@
-import express, {Express} from "express"
+import express from "express";
 import cors from "cors";
+import checkRoutes from "./routes/check.routes";
 
-export const app: Express = express();
+export const app: express.Express = express();
 
-app.use(cors());
+app.use(cors({
+  credentials: true,
+  methods: ['*'],
+}));
 app.use(express.json());
+app.use(express.urlencoded({extended: true}))
 
 app.get("/health", (req, res) => {
   res.json({ status: "ok" });
 });
+
+app.use("/api", checkRoutes);
